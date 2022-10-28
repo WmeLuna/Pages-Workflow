@@ -1,0 +1,7 @@
+name: 'GithubPagesTemplate'
+description: 'Makes it simple to use my preset for Github Pages'
+runs:
+  using: "composite"
+  steps:
+    - run: action.sh
+      shell: bash
