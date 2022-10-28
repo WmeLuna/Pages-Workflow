@@ -5,7 +5,9 @@ runs:
   steps:
     - uses: actions/checkout@v3
     - run: |
-        git status
+        cd /tmp
+        git clone https://github.com/WmeLuna/Pages-Workflow
+        mv /tmp/Pages-Workflow/pages/* ${GITHUB_WORKSPACE}/
+        cd ${GITHUB_WORKSPACE}/
         ls
-        pwd
       shell: bash
