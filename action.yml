@@ -3,11 +3,20 @@ description: 'Makes it simple to use my preset for Github Pages'
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v3
-    - run: |
+    - name: Add Pages files
+      run: |
         cd /tmp
-        git clone https://github.com/WmeLuna/Pages-Workflow
-        mv /tmp/Pages-Workflow/page/* ${GITHUB_WORKSPACE}/
+        git clone --quiet https://github.com/WmeLuna/Pages-Workflow
+        mv -n /tmp/Pages-Workflow/page/* ${GITHUB_WORKSPACE}/
         cd ${GITHUB_WORKSPACE}/
-        ls
+      shell: bash
+
+    - name: Commit to Branch
+      run: |
+        git config --local user.email '41898282+github-actions[bot]@users.noreply.github.com'
+        git config --local user.name 'GitHub Action'
+        git checkout --orphan gh-pages
+        git add --all
+        git commit -m 'Push build'
+        git push --force origin gh-pages
       shell: bash
