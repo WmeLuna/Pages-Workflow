@@ -3,5 +3,9 @@ description: 'Makes it simple to use my preset for Github Pages'
 runs:
   using: "composite"
   steps:
-    - run: pwd && ls
+    - uses: actions/checkout@v3
+    - run: |
+        git status
+        ls
+        pwd
       shell: bash
